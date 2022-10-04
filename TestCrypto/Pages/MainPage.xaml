@@ -13,45 +13,83 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" x:Name="Navigation">
-            <TextBlock Text="Main Page" MouseLeftButtonDown="GoToMain"
-                       Margin="30,0,0,0"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" x:Name="Navigation">
+            <TextBlock Margin="5,0,0,0"
+                       FontSize="20">
+                <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
+            </TextBlock>
         </StackPanel>
-
-        <ListBox Grid.Row="0" Grid.Column="2" 
+        <Grid Grid.Row="1" Grid.Column="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="Search" Width="200" FontSize="20"/>
+                <Button Content="Find"
+                        Click="SearchCurrency"
+                        FontSize="20"
+                        Margin="5,0,0,0"/>
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="500"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" >
+                <TextBlock Text="Symbol"
+                           Width="100" FontSize="20"
+                           Margin="5,0,0,0"/>
+                <TextBlock Text="Name"
+                           Width="170" FontSize="20"
+                           Margin="5,0,0,0"/>
+                <TextBlock Text="Popularity"
+                           Width="137" FontSize="20"/>
+                <TextBlock Text="Details" FontSize="20"/>
+            </StackPanel>
+            <Border Grid.Row="1"
+                    BorderThickness="2" BorderBrush="Black">
+                <ListBox Grid.Row="1" Grid.Column="0" 
                  x:Name="View" FontSize="20" 
-                 Height="500" 
-                 Grid.RowSpan="2"
-                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <ListBox.Resources>
-                <Style TargetType="{x:Type ListBoxItem}">
-                    <Setter Property="Height" Value="50"/>
-                </Style>
-            </ListBox.Resources>
-            <ListBox.ItemTemplate >
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" x:Name="RowOfList"  >
-                        <TextBlock Text="{Binding Symbol}"
+                 Height="500"                  
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 VerticalAlignment="Top">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" x:Name="RowOfList"  >
+                                <TextBlock Text="{Binding Symbol}"
                                    Width="100"/>
-                        <TextBlock Text="{Binding Name}"
-                                   Width="250"/>
-                        <TextBlock Text="#"/>
-                        <TextBlock Text="{Binding Rank}"
-                                   Width="50"/>
-                        <TextBlock Text="Detail" MouseLeftButtonDown="ShowDetail"/>
-                    </StackPanel>
-                    
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                <TextBlock Text="{Binding Name}"
+                                   Width="200"/>
+                                <TextBlock Text="#"/>
+                                <TextBlock Text="{Binding Rank}"
+                                   Width="100"/>
+                                <TextBlock Text="Detail" MouseLeftButtonDown="ShowDetail"/>
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            
+
+        </Grid>
+        
     </Grid>
 </Page>

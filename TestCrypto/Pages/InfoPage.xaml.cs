@@ -22,22 +22,15 @@ namespace TestCrypto
     /// </summary>
     public partial class InfoPage : Page
     {
-        Page backPage;
-        public InfoPage(Page page, CurrencyInfo currencyInfo, StackPanel navigation)
+        public InfoPage(CurrencyInfo currencyInfo)
         {
             InitializeComponent();
-            backPage = page;
             name.Text = currencyInfo.Name;
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = currencyInfo.Name + "information";
-            textBlock.Margin = new Thickness(30, 0, 0, 0);
-            
-
         }
 
         private void GoToMain(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(backPage);
+            NavigationService.Navigate(new MainPage());
         }
         private void GoToConvert(object sender, MouseButtonEventArgs e)
         {

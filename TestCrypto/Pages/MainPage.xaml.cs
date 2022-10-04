@@ -27,18 +27,15 @@ namespace TestCrypto
         public MainPage()
         {
             InitializeComponent();
-            _viewModel = new ViewModel("https://api.coincap.io/v2/assets");
+            _viewModel = new ViewModel("https://api.coincap.io/v2/assets?limit=10");
             View.ItemsSource = _viewModel.Currencies;
         }
 
         private void ShowDetail(object sender, MouseButtonEventArgs e)
         {
             CurrencyInfo currencyInfo = ((FrameworkElement)sender).DataContext as CurrencyInfo;           
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = currencyInfo.Name + " information";
-            textBlock.Margin = new Thickness(30, 0, 0, 0);
-            Navigation.Children.Add(textBlock);
-            InfoPage informationPage = new InfoPage(this, currencyInfo, Navigation);
+
+            InfoPage informationPage = new InfoPage(currencyInfo);
 
             NavigationService.Navigate(informationPage);
         }
@@ -52,5 +49,9 @@ namespace TestCrypto
             NavigationService.Navigate(new ConvertPage());
         }
 
+        private void SearchCurrency(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
