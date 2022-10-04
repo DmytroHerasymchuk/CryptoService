@@ -8,9 +8,20 @@
       xmlns:local="clr-namespace:TestCrypto"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="InfoPage">
+      Title="InfoPage"
+      Background="BlanchedAlmond">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" x:Name="Navigation">
+            <!--<TextBlock Text="Main Page" MouseLeftButtonDown="GoToMain"
+                       Margin="30,0,0,0"/>-->
+            
+
+        </StackPanel>
+        <TextBlock x:Name="name" Grid.Row="1" FontSize="25"/>
     </Grid>
 </Page>

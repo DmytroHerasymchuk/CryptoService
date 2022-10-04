@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Models;
+using ViewModels;
 
 namespace TestCrypto
 {
@@ -20,9 +22,26 @@ namespace TestCrypto
     /// </summary>
     public partial class InfoPage : Page
     {
-        public InfoPage()
+        Page backPage;
+        public InfoPage(Page page, CurrencyInfo currencyInfo, StackPanel navigation)
         {
             InitializeComponent();
+            backPage = page;
+            name.Text = currencyInfo.Name;
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = currencyInfo.Name + "information";
+            textBlock.Margin = new Thickness(30, 0, 0, 0);
+            
+
+        }
+
+        private void GoToMain(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(backPage);
+        }
+        private void GoToConvert(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new ConvertPage());
         }
     }
 }

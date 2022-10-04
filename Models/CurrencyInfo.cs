@@ -10,14 +10,10 @@ namespace Models
     {
         public string ID { get; set; }
         public string Name { get; set; }
-
         public string Symbol { get; set; }
-
         public int Rank { get; set; }
         public decimal PriceUsd { get; set; }
-
         public decimal ChangePercent { get; set; }
-
         public CurrencyInfo(string iD, string name, string symbol, int rank, decimal priceUsd, decimal changePercent)
         {
             ID = iD;

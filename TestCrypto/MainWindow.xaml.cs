@@ -21,20 +21,13 @@ namespace TestCrypto
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewModel _viewModel;
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Content = new MainPage();
         }
-        private void GoToConvertPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new ConvertPage();
-        }
+       
 
-        private void GoToMainPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new MainPage();
-        }
+
     }
 }

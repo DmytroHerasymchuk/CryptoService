@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Models;
 using ViewModels;
 
 namespace TestCrypto
@@ -22,12 +23,33 @@ namespace TestCrypto
     public partial class MainPage : Page
     {
         private ViewModel _viewModel;
+
         public MainPage()
         {
             InitializeComponent();
-            _viewModel = new ViewModel();
-            _viewModel.Get();
-            View.ItemsSource = _viewModel.Form.CurrencyInfoList;
+            _viewModel = new ViewModel("https://api.coincap.io/v2/assets");
+            View.ItemsSource = _viewModel.Currencies;
+        }
+
+        private void ShowDetail(object sender, MouseButtonEventArgs e)
+        {
+            CurrencyInfo currencyInfo = ((FrameworkElement)sender).DataContext as CurrencyInfo;           
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = currencyInfo.Name + " information";
+            textBlock.Margin = new Thickness(30, 0, 0, 0);
+            Navigation.Children.Add(textBlock);
+            InfoPage informationPage = new InfoPage(this, currencyInfo, Navigation);
+
+            NavigationService.Navigate(informationPage);
+        }
+
+        private void GoToMain(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
+        }
+        private void GoToConvert(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new ConvertPage());
         }
 
     }

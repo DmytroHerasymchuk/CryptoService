@@ -8,17 +8,12 @@
         xmlns:local="clr-namespace:TestCrypto"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
+        WindowState="Maximized"
         >
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" >
-            <Button Content="Main Page" Click="GoToMainPage" Width="200"/>
-            <Button Content="Convert" Click="GoToConvertPage" Width="200"/>
-        </StackPanel>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1">
+
+        
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden">
             
         </Frame>
     </Grid>
