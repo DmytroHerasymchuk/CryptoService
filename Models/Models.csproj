@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurrencyInfo.cs" />
+    <Compile Include="Market.cs" />
+    <Compile Include="Currency.cs" />
     <Compile Include="JSONExtension.cs" />
-    <Compile Include="MainForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

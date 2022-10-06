@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-      d:DataContext="{d:DesignInstance viewModels:ViewModel}"
+      d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
       xmlns:local="clr-namespace:TestCrypto"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -45,24 +45,24 @@
         <Grid Grid.Row="1" Grid.Column="0" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="500"/>
+                <RowDefinition Height="350"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" >
                 <TextBlock Text="Symbol"
                            Width="100" FontSize="20"
                            Margin="5,0,0,0"/>
                 <TextBlock Text="Name"
-                           Width="170" FontSize="20"
+                           Width="140" FontSize="20"
                            Margin="5,0,0,0"/>
-                <TextBlock Text="Popularity"
-                           Width="137" FontSize="20"/>
+                <TextBlock Text="Market cap rank "
+                           Width="167" FontSize="20"/>
                 <TextBlock Text="Details" FontSize="20"/>
             </StackPanel>
             <Border Grid.Row="1"
                     BorderThickness="2" BorderBrush="Black">
                 <ListBox Grid.Row="1" Grid.Column="0" 
                  x:Name="View" FontSize="20" 
-                 Height="500"                  
+                 Height="350"                  
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  VerticalAlignment="Top">
                     <ListBox.Resources>

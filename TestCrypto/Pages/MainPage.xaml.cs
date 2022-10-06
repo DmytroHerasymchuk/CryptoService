@@ -22,20 +22,22 @@ namespace TestCrypto
     /// </summary>
     public partial class MainPage : Page
     {
-        private ViewModel _viewModel;
+        private MainViewModel _viewModel;
 
         public MainPage()
         {
             InitializeComponent();
-            _viewModel = new ViewModel("https://api.coincap.io/v2/assets?limit=10");
+            _viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending");
+
+        
             View.ItemsSource = _viewModel.Currencies;
         }
 
         private void ShowDetail(object sender, MouseButtonEventArgs e)
         {
-            CurrencyInfo currencyInfo = ((FrameworkElement)sender).DataContext as CurrencyInfo;           
+            Currency currencyInfo = ((FrameworkElement)sender).DataContext as Currency;           
 
-            InfoPage informationPage = new InfoPage(currencyInfo);
+            InfoPage informationPage = new InfoPage(currencyInfo.ID);
 
             NavigationService.Navigate(informationPage);
         }

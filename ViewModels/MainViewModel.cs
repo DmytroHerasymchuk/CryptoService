@@ -12,13 +12,13 @@ using Services;
 
 namespace ViewModels
 {
-    public class ViewModel
+    public class MainViewModel
     {
-        public List<CurrencyInfo> Currencies {get;set;}
+        public List<Currency> Currencies {get;set;}
 
-        public ViewModel(string url)
+        public MainViewModel(string url)
         {
-            Currencies = ApiService.GetCurrencyInfos(url);
+            Currencies = ApiService.GetCurrencyTrands(url);
         }
     }
 }

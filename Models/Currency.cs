@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class CurrencyInfo
+    public class Currency
     {
         public string ID { get; set; }
         public string Name { get; set; }
@@ -14,14 +14,9 @@ namespace Models
         public int Rank { get; set; }
         public decimal PriceUsd { get; set; }
         public decimal ChangePercent { get; set; }
-        public CurrencyInfo(string iD, string name, string symbol, int rank, decimal priceUsd, decimal changePercent)
-        {
-            ID = iD;
-            Name = name;
-            Symbol = symbol;
-            Rank = rank;
-            PriceUsd = priceUsd;
-            ChangePercent = changePercent;
-        }
+        public decimal Volume { get; set; }
+        public decimal MarketCap { get; set; }
+        public List<Market> Markets { get; set; } = new List<Market>();
+
     }
 }

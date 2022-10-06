@@ -4,12 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-      d:DataContext="{d:DesignInstance viewModels:ViewModel}"
+      d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
       xmlns:local="clr-namespace:TestCrypto"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InfoPage"
-      Background="BlanchedAlmond">
+      Background="AliceBlue">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,6 +22,62 @@
                 <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
             </TextBlock>
         </StackPanel>
-        <TextBlock x:Name="name" Grid.Row="1" FontSize="25"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="400"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Name: " FontSize="20"/>
+            <Label x:Name="name" Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="20"/>
+            <Label Grid.Row="1" Content="Price in $: " FontSize="20"/>
+            <Label x:Name="price" Grid.Row="1"
+                       Grid.Column="1"
+                       FontSize="20"/>
+            <Label Grid.Row="2" Content="Volume: " FontSize="20"/>
+            <Label x:Name="volume" Grid.Row="2"
+                       Grid.Column="1"
+                       FontSize="20"/>
+            <Label Grid.Row="3" Content="Price change in last 24 hours: " FontSize="20"/>
+            <Label x:Name="change" Grid.Row="3"
+                       Grid.Column="1"
+                       FontSize="20"/>
+            <Label Grid.Row="5" Content="Markets: " FontSize="20"/>
+            <Label x:Name="market" Grid.Row="5"
+                       Grid.Column="1"
+                       FontSize="20"/>
+            <Label Grid.Row="4" Content="Market Cap: " FontSize="20"/>
+            <Label x:Name="marketCap" Grid.Row="4"
+                       Grid.Column="1"
+                       FontSize="20"/>
+            <ListBox x:Name="Markets" Grid.Row="6" ScrollViewer.VerticalScrollBarVisibility="Disabled" FontSize="20">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding ID}"/>
+                            <TextBlock>
+                                <Hyperlink  NavigateUri = "{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
+                                    Link
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        
     </Grid>
 </Page>
