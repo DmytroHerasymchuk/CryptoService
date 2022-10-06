@@ -90,6 +90,9 @@
             
 
         </Grid>
-        
+        <ComboBox  x:Name="CB" Grid.Row="1" Grid.Column="1"
+          TextBoxBase.TextChanged="ComboBox_TextChanged"
+          IsTextSearchEnabled="False" IsEditable="True"
+          VerticalAlignment="Top"/>
     </Grid>
 </Page>

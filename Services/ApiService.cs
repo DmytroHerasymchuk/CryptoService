@@ -7,6 +7,8 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Models;
+using System.Net.Http;
+
 
 namespace Services
 {
@@ -44,7 +46,7 @@ namespace Services
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                currencies = null;
             }
             return currencies;
         }
@@ -81,7 +83,8 @@ namespace Services
                         {
                             ID = token["market"].StringValueOf("identifier"),
                             Name = token["market"].StringValueOf("name"),
-                            Url = token.StringValueOf("trade_url")
+                            Url = token.StringValueOf("trade_url"),
+                            LastPrice = token["converted_last"].DecimalValueOf("usd")
                         });
                     }
                 }
@@ -93,6 +96,44 @@ namespace Services
           
             return currency;
         }
+        public static List<Currency> SearchCurrencies(string url)
+        {
+            List<Currency> currencies = new List<Currency>();
+            try
+            {
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response != null)
+                {
+                    StreamReader sr = new StreamReader(response.GetResponseStream());
+                    string responseText = sr.ReadToEnd();
+                    response.Close();
+                    JObject responseObject = JObject.Parse(responseText);
+
+                    foreach (JToken token in responseObject["coins"])
+                    {
+                        currencies.Add(new Currency()
+                        {
+                            ID = token.StringValueOf("id"),
+                            Name = token.StringValueOf("name"),
+                            Symbol = token.StringValueOf("symbol"),
+                        });
+                    }
+                }
+            }
+
+
+            catch (Exception ex)
+            {
+                currencies = null;
+            }
+                //currencies.ToListAsync();
+                return currencies;
+            }
+
+
 
     }
 }
