@@ -14,11 +14,12 @@ namespace ViewModels
 {
     public class SearchViewModel
     {
-        public List<Currency> Currencies { get; set; }
+        public TaskCompletion<List<Currency>> Currencies { get; set; }
 
         public SearchViewModel(string url)
         {
-            Currencies = ApiService.SearchCurrencies(url);
+            Currencies = new TaskCompletion<List<Currency>>(ApiService.SearchCurrenciesAsync(url));
+            
         }
     }
 }

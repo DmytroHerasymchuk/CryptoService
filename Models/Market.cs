@@ -8,10 +8,10 @@ namespace Models
 {
     public class Market
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string Url { get; set; }
+        public string ID { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
 
-        public decimal LastPrice { get; set; }
+        public decimal LastPrice { get; set; } = decimal.Zero;
     }
 }

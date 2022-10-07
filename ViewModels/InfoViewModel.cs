@@ -12,6 +12,7 @@ namespace ViewModels
     {
         public Currency Currency { get; set; }
 
+
         public InfoViewModel(string url)
         {
             Currency = ApiService.GetCurrencyInfo(url);

@@ -1,15 +1,12 @@
-﻿<Page x:Class="TestCrypto.MainPage"
+﻿<Page x:Class="TestCrypto.Pages.SearchPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-      d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-      xmlns:local="clr-namespace:TestCrypto"
+      xmlns:local="clr-namespace:TestCrypto.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage"
-      Background="Azure">
+      Title="SearchPage" Background="Azure">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,65 +19,37 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Right" FontSize="20" Margin="0,0,5,0">
+            <Hyperlink Click="Button_Click">
+                Back
+            </Hyperlink>
+        </TextBlock>
         <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" x:Name="Navigation">
             <TextBlock Margin="5,0,0,0"
                        FontSize="20">
                 <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
             </TextBlock>
         </StackPanel>
-        <Border Grid.Row="1" Grid.Column="2" BorderThickness="2" BorderBrush="Black" Width="300" Height="100" 
-                HorizontalAlignment="Right" VerticalAlignment="Top"
-                Margin="5">
-            <TextBlock Grid.Row="1" Grid.Column="2" FontSize="24" 
-                   Width="300" Height="100" TextWrapping="Wrap" TextAlignment="Center">              
-            Application for finding information 
-            about cryptocurrencies
-            </TextBlock>
-        </Border>
-       
-        <TextBlock Grid.Row="1" Grid.Column="2" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                    TextWrapping="Wrap" TextAlignment="Right" Margin="5"> 
-            <Hyperlink NavigateUri="https://www.coingecko.com/" RequestNavigate="Hyperlink_RequestNavigate">
-                Data provided by CoinGecko
-            </Hyperlink>
-            
-        </TextBlock>
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" >
-                <TextBox x:Name="Search" Width="500" FontSize="20"/>
-                <Button Content="Find"
-                        Click="SearchCurrency"
-                        FontSize="20"
-                        Width="100"
-                        Margin="5,0,0,0"/>
-            </StackPanel>
-            
-        </Grid>
         <Grid Grid.Row="1" Grid.Column="0" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="350"/>
+                <RowDefinition Height="600"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" >
                 <TextBlock Text="Symbol"
                            Width="100" FontSize="20"
                            Margin="5,0,0,0"/>
                 <TextBlock Text="Name"
-                           Width="140" FontSize="20"
+                           Width="307" FontSize="20"
                            Margin="5,0,0,0"/>
-                <TextBlock Text="Market cap rank "
-                           Width="167" FontSize="20"/>
+                
                 <TextBlock Text="Details" FontSize="20"/>
             </StackPanel>
             <Border Grid.Row="1"
                     BorderThickness="2" BorderBrush="Black">
-                <ListBox Grid.Row="1" Grid.Column="0"
+                <ListBox Grid.Row="1" Grid.Column="0" 
                  x:Name="View" FontSize="20" 
-                 Height="350"                   
+                 Height="600"                  
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  VerticalAlignment="Top">
                     <ListBox.Resources>
@@ -91,13 +60,11 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" x:Name="RowOfList"  >
-                                <TextBlock Text="{Binding Path=Symbol}"
+                                <TextBlock Text="{Binding Symbol}"
                                    Width="100"/>
-                                <TextBlock Text="{Binding Path=Name}"
-                                   Width="200"/>
-                                <TextBlock Text="#"/>
-                                <TextBlock Text="{Binding Path=Rank}"
-                                   Width="100"/>
+                                <TextBlock Text="{Binding Name}"
+                                   Width="300"/>
+
                                 <TextBlock Text="Detail" MouseLeftButtonDown="ShowDetail" Style="{StaticResource TextLink}"/>
                             </StackPanel>
 
@@ -105,8 +72,6 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Border>
-
-
-        </Grid>
+         </Grid>
     </Grid>
 </Page>
