@@ -40,7 +40,7 @@ namespace TestCrypto
 
         private void GoToMain(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new MainViewModel("https://api.coingecko.com/api/v3/search/trending"));
+            NavigationService.Navigate(new MainViewModel("https://api.coingecko.com/api/v3/search/trending", "gecko"));
         }
         private void GoToConvert(object sender, MouseButtonEventArgs e)
         {

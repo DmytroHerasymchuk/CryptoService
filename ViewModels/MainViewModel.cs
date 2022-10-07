@@ -16,9 +16,9 @@ namespace ViewModels
     {
         public List<Currency> Currencies {get;set;}
 
-        public MainViewModel(string url)
+        public MainViewModel(string url, string chooseApi)
         {
-            Currencies = ApiService.GetCurrencyTrands(url);
+            Currencies = ApiService.GetCurrencyTrands(url, chooseApi);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Services
 {
     public class ApiService
     {
-        public static List<Currency> GetCurrencyTrands(string url)
+        public static List<Currency> GetCurrencyTrands(string url, string chooseApi)
         {
             List<Currency> currencies = new List<Currency>();
             try
@@ -29,18 +29,40 @@ namespace Services
                     string responseText = sr.ReadToEnd();
                     response.Close();
                     JObject responseObject = JObject.Parse(responseText);
-                    
-                    foreach (JToken token in responseObject["coins"])
+                    switch (chooseApi)
                     {
-                        currencies.Add(new Currency()
-                        {
-                            ID = token["item"].StringValueOf("id"),
-                            Name = token["item"].StringValueOf("name"),
-                            Symbol = token["item"].StringValueOf("symbol"),
-                            Rank = token["item"].StringValueOf("market_cap_rank"),
-                            
-                        });
-                    } 
+                        case "coincap":
+                            foreach (JToken token in responseObject["data"])
+                            {
+
+                                currencies.Add(new Currency()
+                                {
+                                    ID = token.StringValueOf("id"),
+                                    Name = token.StringValueOf("name"),
+                                    Symbol = token.StringValueOf("symbol"),
+                                    Rank = token.StringValueOf("rank"),
+
+                                });
+
+                            }
+                            break;
+                        default:
+                            foreach (JToken token in responseObject["coins"])
+                            {
+
+                                currencies.Add(new Currency()
+                                {
+                                    ID = token["item"].StringValueOf("id"),
+                                    Name = token["item"].StringValueOf("name"),
+                                    Symbol = token["item"].StringValueOf("symbol"),
+                                    Rank = token["item"].StringValueOf("market_cap_rank"),
+
+                                });
+
+                            }
+                            break;
+                    }
+                    
                 }
                 
             }
@@ -78,7 +100,7 @@ namespace Services
                         Volume = responseObject["market_data"]["total_volume"].DecimalValueOf("usd"),
                         MarketCap = responseObject["market_data"]["market_cap"].DecimalValueOf("usd"),
                     };
-                    if (currency.Rank == null)
+                    if (currency.Rank == "")
                     {
                         currency.Rank = "No data";
                     }
@@ -90,6 +112,16 @@ namespace Services
                             Name = token["market"].StringValueOf("name"),
                             Url = token.StringValueOf("trade_url"),
                             LastPrice = token["converted_last"].DecimalValueOf("usd")
+                        });
+                    }
+                    if (!currency.Markets.Any())
+                    {
+                        currency.Markets.Add(new Market()
+                        {
+                            ID = "Not found",
+                            Name = "Not found",
+                            Url = "",
+                            LastPrice = 0
                         });
                     }
                     
@@ -119,12 +151,19 @@ namespace Services
 
                         foreach (JToken token in responseObject["coins"])
                         {
-                            currencies.Add(new Currency()
+                            Currency currency = new Currency()
                             {
                                 ID = token.StringValueOf("id"),
                                 Name = token.StringValueOf("name"),
                                 Symbol = token.StringValueOf("symbol"),
-                            });
+                                Rank = token.StringValueOf("market_cap_rank")
+                            };
+                            if (currency.Rank == "")
+                            {
+                                currency.Rank = "No data";
+                            }
+                            currencies.Add(currency);
+                            
                         }
                     }
                 }

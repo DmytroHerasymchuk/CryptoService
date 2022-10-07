@@ -30,48 +30,35 @@
                 <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
             </TextBlock>
         </StackPanel>
-        <Grid Grid.Row="1" Grid.Column="0" Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="600"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" >
-                <TextBlock Text="Symbol"
-                           Width="100" FontSize="20"
-                           Margin="5,0,0,0"/>
-                <TextBlock Text="Name"
-                           Width="307" FontSize="20"
-                           Margin="5,0,0,0"/>
-                
-                <TextBlock Text="Details" FontSize="20"/>
-            </StackPanel>
-            <Border Grid.Row="1"
-                    BorderThickness="2" BorderBrush="Black">
-                <ListBox Grid.Row="1" Grid.Column="0" 
+        
+        <Border Grid.Row="1"
+                    BorderThickness="2" BorderBrush="Black" Margin="5" Grid.ColumnSpan="3">
+            <ListBox Grid.Row="1" Grid.Column="0" 
                  x:Name="View" FontSize="20" 
-                 Height="600"                  
+                 Height="800"                  
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  VerticalAlignment="Top">
-                    <ListBox.Resources>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Height" Value="50"/>
-                        </Style>
-                    </ListBox.Resources>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" x:Name="RowOfList"  >
-                                <TextBlock Text="{Binding Symbol}"
-                                   Width="100"/>
-                                <TextBlock Text="{Binding Name}"
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Height" Value="50"/>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" x:Name="RowOfList"  >
+                            <TextBlock Text="{Binding Symbol}"
                                    Width="300"/>
+                            <TextBlock Text="{Binding Name}"
+                                   Width="500"/>
+                            <TextBlock Text="# "/>
+                            <TextBlock Text="{Binding Rank}"
+                                   Width="500"/>
+                            <TextBlock Text="Detail" MouseLeftButtonDown="ShowDetail" Style="{StaticResource TextLink}"/>
+                        </StackPanel>
 
-                                <TextBlock Text="Detail" MouseLeftButtonDown="ShowDetail" Style="{StaticResource TextLink}"/>
-                            </StackPanel>
-
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Border>
-         </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </Grid>
 </Page>

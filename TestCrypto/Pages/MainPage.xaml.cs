@@ -31,8 +31,8 @@ namespace TestCrypto
         public MainPage()
         {
             InitializeComponent();
-            _viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending");
-            View.ItemsSource = _viewModel.Currencies;
+            //_viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending");
+            //View.ItemsSource = _viewModel.Currencies;
             
         }
 
@@ -70,6 +70,17 @@ namespace TestCrypto
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private void GetCoincap(object sender, RoutedEventArgs e)
+        {
+            _viewModel = new MainViewModel("https://api.coincap.io/v2/assets?limit=10" ,"coincap");
+            View.ItemsSource = _viewModel.Currencies;
+        }
+        private void GetGecko(object sender, RoutedEventArgs e)
+        {
+            _viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending", "gecko");
+            View.ItemsSource = _viewModel.Currencies;
         }
     }
 }
