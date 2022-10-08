@@ -27,18 +27,24 @@ namespace TestCrypto.Pages
         {
             InitializeComponent();
             View.ItemsSource = searchViewModel.Currencies.Result;
+            if (searchViewModel.Currencies.Result.Count == 0)
+            {              
+                NotFound.Text = "Not Found";    
+            }
         }
 
-        private void ShowDetail(object sender, MouseButtonEventArgs e)
+        private async void ShowDetail(object sender, MouseButtonEventArgs e)
         {
             Currency currencyInfo = ((FrameworkElement)sender).DataContext as Currency;
 
-            InfoPage informationPage = new InfoPage(currencyInfo.ID);
+            InfoViewModel infoViewModel = new InfoViewModel($"https://api.coingecko.com/api/v3/coins/{currencyInfo.ID}?localization=false&community_data=false&developer_data=false");
+            await Task.Delay(500);
+            InfoPage informationPage = new InfoPage(infoViewModel);
 
             NavigationService.Navigate(informationPage);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }

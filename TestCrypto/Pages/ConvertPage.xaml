@@ -9,14 +9,43 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ConvertPage"
-      Background="Beige">
+      Style="{StaticResource PageStyle}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" x:Name="Navigation">
             <TextBlock Margin="5,0,0,0"
                        FontSize="20">
                 <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
             </TextBlock>
         </StackPanel>
+        <ComboBox Grid.Row="1" x:Name="First" FontSize="20" Margin="5">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Grid.Row="1" Grid.Column="2" x:Name="Second" FontSize="20" Margin="5">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Grid.Column="1" Grid.Row="2" Content="Convert" FontSize="20" Width="100" Click="Convert"/>
+        <TextBox x:Name="FirstInput" Grid.Row="3" FontSize="20" Margin="5" PreviewTextInput="FirstInput_PreviewTextInput"/>
+        <TextBox x:Name="SecondInput" Grid.Row="3" Grid.Column="2" FontSize="20" Margin="5" PreviewTextInput="SecondInput_PreviewTextInput"/>
     </Grid>
 </Page>

@@ -13,9 +13,10 @@ namespace Models
         public string Symbol { get; set; } = string.Empty;
         public string Rank { get; set; } = string.Empty;
         public decimal PriceUsd { get; set; } = decimal.Zero;
-        public decimal ChangePercent { get; set; } = decimal.Zero;
+        public string ChangePercent { get; set; } = string.Empty;
         public decimal Volume { get; set; } = decimal.Zero;
         public decimal MarketCap { get; set; } = decimal.Zero;
+        public decimal Rate { get; set; } = decimal.Zero;
         public List<Market> Markets { get; set; } = new List<Market>();
 
     }

@@ -23,28 +23,31 @@ namespace TestCrypto
     /// </summary>
     public partial class InfoPage : Page
     {
-        private InfoViewModel viewModel;
-        public InfoPage(string id)
+
+        public InfoPage(InfoViewModel infoViewModel)
         {
             InitializeComponent();
-            viewModel = new InfoViewModel($"https://api.coingecko.com/api/v3/coins/{id}?localization=false&community_data=false&developer_data=false");
-            name.Content = viewModel.Currency.Name;
-            symbol.Content = viewModel.Currency.Symbol.ToUpper();
-            volume.Content = viewModel.Currency.Volume;
-            marketCap.Content = viewModel.Currency.MarketCap;
-            rank.Content = viewModel.Currency.Rank;
-            price.Content = viewModel.Currency.PriceUsd.ToString() + " $";
-            change.Content = viewModel.Currency.ChangePercent.ToString() + " %";
-            Markets.ItemsSource = viewModel.Currency.Markets;
+                 
+            name.Content = infoViewModel.Currency.Result.Name;
+            
+            symbol.Content = infoViewModel.Currency.Result.Symbol.ToUpper();
+            
+            volume.Content = infoViewModel.Currency.Result.Volume;
+            
+            marketCap.Content = infoViewModel.Currency.Result.MarketCap;
+            
+            rank.Content = infoViewModel.Currency.Result.Rank;
+            
+            price.Content = infoViewModel.Currency.Result.PriceUsd.ToString() + " $";
+            
+            change.Content = infoViewModel.Currency.Result.ChangePercent.ToString() + " %";
+            
+            Markets.ItemsSource = infoViewModel.Currency.Result.Markets;
         }
 
         private void GoToMain(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new MainViewModel("https://api.coingecko.com/api/v3/search/trending", "gecko"));
-        }
-        private void GoToConvert(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new ConvertPage());
+            NavigationService.Navigate(new MainViewModel("https://api.coingecko.com/api/v3/search/trending"));
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -53,7 +56,7 @@ namespace TestCrypto
             e.Handled = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }

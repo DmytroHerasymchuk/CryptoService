@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage"
-      Background="Azure">
+      Style="{StaticResource PageStyle}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +28,12 @@
                 <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
             </TextBlock>
         </StackPanel>
-        <Border Grid.Row="2" Grid.Column="0" BorderThickness="2" BorderBrush="Black" Width="300" Height="100" 
+        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <RadioButton x:Name="DarkMode" Content="Dark Mode" GroupName="ModesSelection" Checked="DarkMode_Checked" FontSize="14" Margin="0,0,5,0"/>
+            <RadioButton x:Name="LightMode" Content="Light Mode" GroupName="ModesSelection" IsChecked="True" Checked="LightMode_Checked" FontSize="14" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="2" Grid.Column="0" BorderThickness="2" Width="300" Height="100" 
                 HorizontalAlignment="Left" VerticalAlignment="Top"
                 Margin="5">
             <TextBlock Grid.Row="1" Grid.Column="2" FontSize="24" 
@@ -39,7 +44,7 @@
         </Border>
         <Image Grid.Row="2" Grid.Column="2" Source="Images/CoinGecko.png"  Width="64" Height="64" Margin="141,46,62,0"/>
         <TextBlock Grid.Row="2" Grid.Column="2" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                    TextWrapping="Wrap" TextAlignment="Right" Margin="5"> 
+                    TextWrapping="Wrap" TextAlignment="Right" Margin="0,0,5,23"> 
             <Hyperlink NavigateUri="https://www.coingecko.com/" RequestNavigate="Hyperlink_RequestNavigate">
                 Data provided by CoinGecko
             </Hyperlink>
@@ -56,10 +61,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="1" Text="Show Trands by 'Coincap.io'" FontSize="20" Margin="5"/>
-            <TextBlock Grid.Row="3" Text="Show Trands by 'CoinGecko.com'" FontSize="20" Margin="5"/>
-            <Button Grid.Row="1" Grid.Column="1" Content="Show" FontSize="20" Click="GetCoincap" Width="100" Margin="5"/>
-            <Button Grid.Row="3" Grid.Column="1" Content="Show" FontSize="20" Click="GetGecko" Width="100" Margin="5"/>
+            <TextBlock Grid.Row="1" Text="Show Trands by 'CoinGecko.com'" FontSize="20" Margin="5"/>
+
+            <Button Grid.Row="1" Grid.Column="1" Content="Show" FontSize="20" Click="GetTrands" Width="100" Margin="5"/>
+
+            <Button Grid.Row="3" Content="Converter" Click="GoToConverter" FontSize="20" Margin="5" Width="100"/>
             <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBox x:Name="Search" Width="400" FontSize="20"/>
                 <Button Content="Find"
@@ -87,7 +93,7 @@
                 <TextBlock Text="Details" FontSize="20"/>
             </StackPanel>
             <Border Grid.Row="1"
-                    BorderThickness="2" BorderBrush="Black">
+                    BorderThickness="2" >
                 <ListBox Grid.Row="1" Grid.Column="0"
                  x:Name="View" FontSize="20" 
                  Height="500"                   

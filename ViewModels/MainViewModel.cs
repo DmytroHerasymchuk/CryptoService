@@ -14,11 +14,11 @@ namespace ViewModels
 {
     public class MainViewModel
     {
-        public List<Currency> Currencies {get;set;}
+        public TaskCompletion<List<Currency>> Currencies {get;set;}
 
-        public MainViewModel(string url, string chooseApi)
+        public MainViewModel(string url)
         {
-            Currencies = ApiService.GetCurrencyTrands(url, chooseApi);
+            Currencies = new TaskCompletion<List<Currency>>(ApiService.GetCurrencyTrandsAsync(url));
         }
     }
 }

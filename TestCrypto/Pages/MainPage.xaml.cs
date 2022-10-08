@@ -25,22 +25,19 @@ namespace TestCrypto
     /// </summary>
     public partial class MainPage : Page
     {
-        private MainViewModel _viewModel;
-        private SearchViewModel _searchViewModel;
 
         public MainPage()
         {
-            InitializeComponent();
-            //_viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending");
-            //View.ItemsSource = _viewModel.Currencies;
-            
+            InitializeComponent();          
         }
 
-        private void ShowDetail(object sender, MouseButtonEventArgs e)
+        private async void ShowDetail(object sender, MouseButtonEventArgs e)
         {
-            Currency currencyInfo = ((FrameworkElement)sender).DataContext as Currency;           
+            Currency currencyInfo = ((FrameworkElement)sender).DataContext as Currency;
 
-            InfoPage informationPage = new InfoPage(currencyInfo.ID);
+            InfoViewModel infoViewModel = new InfoViewModel($"https://api.coingecko.com/api/v3/coins/{currencyInfo.ID}?localization=false&community_data=false&developer_data=false");
+            await Task.Delay(1000);
+            InfoPage informationPage = new InfoPage(infoViewModel);
 
             NavigationService.Navigate(informationPage);
         }
@@ -49,20 +46,14 @@ namespace TestCrypto
         {
             NavigationService.Navigate(new MainPage());
         }
-        private void GoToConvert(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new ConvertPage());
-        }
         private async void SearchCurrency(object sender, RoutedEventArgs e)
         {
             
             if (Search.Text!="")
             {
-                _searchViewModel = new SearchViewModel($"https://api.coingecko.com/api/v3/search?query={Search.Text.ToLower()}");
-                await Task.Delay(3000);
-                NavigationService.Navigate(new SearchPage(_searchViewModel));
-
-
+                SearchViewModel searchViewModel = new SearchViewModel($"https://api.coingecko.com/api/v3/search?query={Search.Text.ToLower()}");
+                await Task.Delay(3500);
+                NavigationService.Navigate(new SearchPage(searchViewModel));
             }
         }
 
@@ -72,15 +63,31 @@ namespace TestCrypto
             e.Handled = true;
         }
 
-        private void GetCoincap(object sender, RoutedEventArgs e)
+        private async void GetTrands(object sender, RoutedEventArgs e)
         {
-            _viewModel = new MainViewModel("https://api.coincap.io/v2/assets?limit=10" ,"coincap");
-            View.ItemsSource = _viewModel.Currencies;
+            MainViewModel viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending");
+            await Task.Delay(1000);
+            View.ItemsSource = viewModel.Currencies.Result;
         }
-        private void GetGecko(object sender, RoutedEventArgs e)
+
+        private void DarkMode_Checked(object sender, RoutedEventArgs e)
         {
-            _viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending", "gecko");
-            View.ItemsSource = _viewModel.Currencies;
+            Properties.Settings.Default.ColorMode = "Dark";
+            Properties.Settings.Default.Save();
+        }
+
+        private void LightMode_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.ColorMode = "Light";
+            Properties.Settings.Default.Save();
+        }
+
+        private async void GoToConverter(object sender, RoutedEventArgs e)
+        {
+            ConverterViewModel converterViewModel = new ConverterViewModel("https://api.coingecko.com/api/v3/exchange_rates");
+
+            await Task.Delay(2000);
+            NavigationService.Navigate(new ConvertPage(converterViewModel));
         }
     }
 }
