@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Market
+    public class CurrencyRate
     {
-        public string ID { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public string Url { get; set; } = string.Empty;
-        public decimal LastPrice { get; set; } = decimal.Zero;
+        public string Symbol { get; set; } = string.Empty;
+        public decimal Rate { get; set; } = decimal.Zero;
     }
 }

@@ -10,12 +10,12 @@ namespace ViewModels
 {
     public class InfoViewModel
     {
-        public TaskCompletion<Currency> Currency { get; set; }
+        public TaskCompletion<CurrencyInfo> Currency { get; set; }
 
 
         public InfoViewModel(string url)
         {
-            Currency = new TaskCompletion<Currency>(ApiService.GetCurrencyInfoAsync(url));
+            Currency = new TaskCompletion<CurrencyInfo>(ApiService.GetCurrencyInfoAsync(url));
         }
     }
 }

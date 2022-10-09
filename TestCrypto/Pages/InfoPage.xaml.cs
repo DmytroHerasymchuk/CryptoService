@@ -30,16 +30,17 @@ namespace TestCrypto
                  
             name.Content = infoViewModel.Currency.Result.Name;
             
+            
             symbol.Content = infoViewModel.Currency.Result.Symbol.ToUpper();
             
-            volume.Content = infoViewModel.Currency.Result.Volume;
+            volume.Content = infoViewModel.Currency.Result.Volume.ToString();
             
             marketCap.Content = infoViewModel.Currency.Result.MarketCap;
             
             rank.Content = infoViewModel.Currency.Result.Rank;
             
-            price.Content = infoViewModel.Currency.Result.PriceUsd.ToString() + " $";
-            
+            price.Content = infoViewModel.Currency.Result.PriceUsd.ToString();
+           
             change.Content = infoViewModel.Currency.Result.ChangePercent.ToString() + " %";
             
             Markets.ItemsSource = infoViewModel.Currency.Result.Markets;
@@ -47,7 +48,7 @@ namespace TestCrypto
 
         private void GoToMain(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new MainViewModel("https://api.coingecko.com/api/v3/search/trending"));
+            NavigationService.Navigate(new MainPage());
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

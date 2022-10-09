@@ -74,7 +74,25 @@
 
                 <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
                     <Setter Property="Background" Value="#bbdaed"/>
-                    <Setter Property="BorderBrush" Value="#bbdaed"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ComboBox}">
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
+                    <Setter Property="Background" Value="#363C49"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
+                    <Setter Property="Background" Value="#bbdaed"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Foreground" Value="White"/>
                 </DataTrigger>
 
@@ -92,7 +110,7 @@
 
                 <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
                     <Setter Property="Background" Value="#bbdaed"/>
-                    <Setter Property="BorderBrush" Value="#bbdaed"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
 
@@ -152,6 +170,20 @@
 
                 <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
                     <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="ComboBoxText" >
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Dark">
+                    <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=ColorMode}" Value="Light">

@@ -36,7 +36,7 @@ namespace TestCrypto
             Currency currencyInfo = ((FrameworkElement)sender).DataContext as Currency;
 
             InfoViewModel infoViewModel = new InfoViewModel($"https://api.coingecko.com/api/v3/coins/{currencyInfo.ID}?localization=false&community_data=false&developer_data=false");
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             InfoPage informationPage = new InfoPage(infoViewModel);
 
             NavigationService.Navigate(informationPage);
@@ -44,7 +44,7 @@ namespace TestCrypto
 
         private void GoToMain(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new MainPage());
+            NavigationService.Refresh();
         }
         private async void SearchCurrency(object sender, RoutedEventArgs e)
         {
@@ -52,7 +52,7 @@ namespace TestCrypto
             if (Search.Text!="")
             {
                 SearchViewModel searchViewModel = new SearchViewModel($"https://api.coingecko.com/api/v3/search?query={Search.Text.ToLower()}");
-                await Task.Delay(3500);
+                await Task.Delay(5000);
                 NavigationService.Navigate(new SearchPage(searchViewModel));
             }
         }
@@ -66,7 +66,7 @@ namespace TestCrypto
         private async void GetTrands(object sender, RoutedEventArgs e)
         {
             MainViewModel viewModel = new MainViewModel("https://api.coingecko.com/api/v3/search/trending");
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             View.ItemsSource = viewModel.Currencies.Result;
         }
 
@@ -85,7 +85,6 @@ namespace TestCrypto
         private async void GoToConverter(object sender, RoutedEventArgs e)
         {
             ConverterViewModel converterViewModel = new ConverterViewModel("https://api.coingecko.com/api/v3/exchange_rates");
-
             await Task.Delay(2000);
             NavigationService.Navigate(new ConvertPage(converterViewModel));
         }

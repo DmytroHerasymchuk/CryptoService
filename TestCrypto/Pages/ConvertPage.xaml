@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -24,28 +24,30 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal" x:Name="Navigation">
-            <TextBlock Margin="5,0,0,0"
-                       FontSize="20">
-                <Hyperlink NavigateUri="MainPage.xaml" >Main Page</Hyperlink>
-            </TextBlock>
-        </StackPanel>
-        <ComboBox Grid.Row="1" x:Name="First" FontSize="20" Margin="5">
+
+        <ComboBox Grid.Row="1" x:Name="First" FontSize="26" Margin="5">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}"/>
+                    <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ComboBoxText}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox Grid.Row="1" Grid.Column="2" x:Name="Second" FontSize="20" Margin="5">
+        <ComboBox Grid.Row="1" Grid.Column="2" x:Name="Second" FontSize="26" Margin="5">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}"/>
+                    
+                    <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ComboBoxText}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Grid.Column="1" Grid.Row="2" Content="Convert" FontSize="20" Width="100" Click="Convert"/>
-        <TextBox x:Name="FirstInput" Grid.Row="3" FontSize="20" Margin="5" PreviewTextInput="FirstInput_PreviewTextInput"/>
-        <TextBox x:Name="SecondInput" Grid.Row="3" Grid.Column="2" FontSize="20" Margin="5" PreviewTextInput="SecondInput_PreviewTextInput"/>
+        <Button Grid.Column="1" Grid.Row="2" Content="Convert" FontSize="26" Width="100" Height="50" Click="Convert"/>
+        <TextBox x:Name="FirstInput" Grid.Row="3" FontSize="26" Margin="5" PreviewTextInput="FirstInput_PreviewTextInput"/>
+        <TextBox x:Name="SecondInput" Grid.Row="3" Grid.Column="2" FontSize="26" Margin="5" PreviewTextInput="SecondInput_PreviewTextInput" IsReadOnly="True"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Swap" FontSize="26" Width="70" Margin="5" Click="SwapCurrencies"/>
+        <TextBlock Grid.Column="0" HorizontalAlignment="Left" FontSize="26" Margin="5,0,0,0">
+        <Hyperlink Click="Back">
+            Back
+        </Hyperlink>
+        </TextBlock>
     </Grid>
 </Page>

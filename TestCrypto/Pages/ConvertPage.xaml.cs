@@ -32,42 +32,72 @@ namespace TestCrypto
 
         private void GetNames(ConverterViewModel converterViewModel)
         {
-            //List<string> names = new List<string>();
-            //foreach (Currency currency in converterViewModel.Currencies.Result)
-            //{
-            //    names.Add(currency.Name);
-            //}
             First.ItemsSource = converterViewModel.Currencies.Result;
+            
             Second.ItemsSource = converterViewModel.Currencies.Result;
-
         }
 
         private void Convert(object sender, RoutedEventArgs e)
         {
-            viewModel.FirstCurrency = First.SelectedItem as Currency;
-            viewModel.SecondCurrency = Second.SelectedItem as Currency;
-            viewModel.Convert(System.Convert.ToDecimal(FirstInput.Text));
-            SecondInput.Text = viewModel.Converted.ToString();
+            if (First.SelectedItem != null && Second.SelectedItem != null && (FirstInput.Text != "" || SecondInput.Text != ""))
+            {
+                viewModel.FirstCurrency = First.SelectedItem as CurrencyRate;
+                viewModel.SecondCurrency = Second.SelectedItem as CurrencyRate;
+                viewModel.Convert(System.Convert.ToDecimal(FirstInput.Text));
+                SecondInput.Text = viewModel.Converted.ToString();
+            }
+
         }
 
         private void SecondInput_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            CheckIsNumeric(e);
+            bool approvedDecimalPoint = false;
+
+            if (e.Text == ",")
+            {
+                if (!((TextBox)sender).Text.Contains(","))
+                {
+                    approvedDecimalPoint = true;
+                }
+            }
+
+            if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
+            {
+                e.Handled = true;
+            }
         }
 
         private void FirstInput_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            CheckIsNumeric(e);
-        }
+            bool approvedDecimalPoint = false;
 
-        private void CheckIsNumeric(TextCompositionEventArgs e)
-        {
-            int result;
+            if (e.Text == ",")
+            {
+                if (!((TextBox)sender).Text.Contains(","))
+                {
+                    approvedDecimalPoint = true;
+                }
+            }
 
-            if (!(int.TryParse(e.Text, out result) || e.Text == "."))
+            if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
             {
                 e.Handled = true;
             }
+        }
+
+        private void SwapCurrencies(object sender, RoutedEventArgs e)
+        {
+            if (First.SelectedItem != null && Second.SelectedItem != null)
+            {
+                CurrencyRate currencyRate = First.SelectedItem as CurrencyRate;
+                First.SelectedItem = Second.SelectedItem;
+                Second.SelectedItem = currencyRate;
+            }
+        }
+
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

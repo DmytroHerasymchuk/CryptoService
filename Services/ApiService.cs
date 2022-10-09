@@ -55,9 +55,9 @@ namespace Services
             }
             return currencies;
         }
-        public static async Task<Currency> GetCurrencyInfoAsync(string url)
+        public static async Task<CurrencyInfo> GetCurrencyInfoAsync(string url)
         {
-            Currency currency = null;
+            CurrencyInfo currency = null;
             string responseBody = "";
             try
             {
@@ -70,7 +70,7 @@ namespace Services
                     {
                         JObject responseObject = JObject.Parse(responseBody);
 
-                        currency = new Currency()
+                        currency = new CurrencyInfo()
                         {
                             ID = responseObject.StringValueOf("id"),
                             Name = responseObject.StringValueOf("name"),
@@ -163,10 +163,9 @@ namespace Services
             }
             return currencies;
         }
-
-        public static async Task<List<Currency>> ConvertAsync(string url)
+        public static async Task<List<CurrencyRate>> GetRatesAsync(string url)
         {
-            List<Currency> currencies = new List<Currency>();
+            List<CurrencyRate> currencies = new List<CurrencyRate>();
             string responseBody = "";
             try
             {
@@ -182,7 +181,7 @@ namespace Services
                         {
                             foreach (JToken token in obj.Children())
                             {
-                                currencies.Add(new Currency()
+                                currencies.Add(new CurrencyRate()
                                 {
                                     Name = token.StringValueOf("name"),
                                     Symbol = token.StringValueOf("unit").ToUpper(),

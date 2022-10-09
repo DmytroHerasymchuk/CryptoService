@@ -8,11 +8,8 @@
         xmlns:local="clr-namespace:TestCrypto"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        WindowState="Maximized"
-        >
+        WindowState="Maximized">
     <Grid>
-
-        
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden">
             
         </Frame>

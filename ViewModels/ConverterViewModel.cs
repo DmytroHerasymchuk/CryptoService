@@ -10,15 +10,15 @@ namespace ViewModels
 {
     public class ConverterViewModel
     {
-        public TaskCompletion<List<Currency>> Currencies { get; set; }
-        public Currency FirstCurrency { get; set; }
-        public Currency SecondCurrency { get; set; }
+        public TaskCompletion<List<CurrencyRate>> Currencies { get; set; }
+        public CurrencyRate FirstCurrency { get; set; }
+        public CurrencyRate SecondCurrency { get; set; }
 
         public decimal Converted { get; set; }
 
         public ConverterViewModel(string url)
         {
-            Currencies = new TaskCompletion<List<Currency>>(ApiService.ConvertAsync(url));
+            Currencies = new TaskCompletion<List<CurrencyRate>>(ApiService.GetRatesAsync(url));
         }
 
         public void Convert(decimal convertible)

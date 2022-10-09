@@ -38,7 +38,7 @@ namespace TestCrypto.Pages
             Currency currencyInfo = ((FrameworkElement)sender).DataContext as Currency;
 
             InfoViewModel infoViewModel = new InfoViewModel($"https://api.coingecko.com/api/v3/coins/{currencyInfo.ID}?localization=false&community_data=false&developer_data=false");
-            await Task.Delay(500);
+            await Task.Delay(2000);
             InfoPage informationPage = new InfoPage(infoViewModel);
 
             NavigationService.Navigate(informationPage);
