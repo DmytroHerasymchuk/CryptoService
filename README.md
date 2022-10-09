@@ -9,3 +9,4 @@ The application supports the following functionality:
  + Ability to search currency by name or symbol;
  + Light/Dark theme.
  
+Cryptocurrency data API: [CoinGecko](https://www.coingecko.com/en/api/documentation)
